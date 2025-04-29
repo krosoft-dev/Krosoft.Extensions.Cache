@@ -8,7 +8,7 @@ resources:
     - repository: Krosoft.Extensions
       type: github
       name: krosoft-dev/Krosoft.Extensions
-      ref: refs/heads/main
+      endpoint: krosoft-dev
 
 variables:
   - template: ./vars/vars.yml
