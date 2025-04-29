@@ -1,15 +1,20 @@
 name: Build 'Krosoft.Extensions.Cache' - $(Date:yyyy.MM.dd).$(BuildID)
 
 trigger:
-  branches:
-    include:
-      - main
+  - main
+
+resources:
+  repositories:
+    - repository: Krosoft.Extensions
+      type: github
+      name: krosoft-dev/Krosoft.Extensions
+      endpoint: krosoft-dev
 
 variables:
   - template: ./vars/vars.yml
 
 stages:
-  - template: ./templates/stages/build-template.yml
+  - template: tools/devops/templates/stages/build-template.yml@Krosoft.Extensions
     parameters:
       vmImage: ${{ variables.vmImage }}
       dotNetVersion: ${{ variables.dotNetVersion }}
