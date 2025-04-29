@@ -1,0 +1,19 @@
+name: Nuget 'Krosoft.Extensions.Cache.Distributed.Redis.HealthChecks' - $(Date:yyyy.MM.dd).$(BuildID)
+
+pr: none
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - "**/Krosoft.Extensions.Cache.Distributed.Redis.HealthChecks/*"
+
+extends:
+  template: ./templates/pipelines/nuget-template.yml
+  parameters:
+    packages:
+     - "Krosoft.Extensions.Cache.Distributed.Redis"
+     - "Krosoft.Extensions.Cache.Distributed.Redis.HealthChecks"
+

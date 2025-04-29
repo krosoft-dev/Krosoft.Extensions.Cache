@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="Krosoft.Extensions.Testing" Version="2025.4.4.1286" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Krosoft.Extensions.Cache.Distributed.Redis\Krosoft.Extensions.Cache.Distributed.Redis.csproj" />
+	</ItemGroup>
+</Project>

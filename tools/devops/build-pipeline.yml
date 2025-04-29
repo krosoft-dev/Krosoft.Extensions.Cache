@@ -1,0 +1,27 @@
+name: Build 'Krosoft.Extensions.Cache' - $(Date:yyyy.MM.dd).$(BuildID)
+
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  - template: ./vars/vars.yml
+
+stages:
+  - template: ./templates/stages/build-template.yml
+    parameters:
+      vmImage: ${{ variables.vmImage }}
+      dotNetVersion: ${{ variables.dotNetVersion }}
+      buildConfiguration: ${{ variables.buildConfiguration }}
+      buildPlatform: ${{ variables.buildPlatform }}
+      buildProjects: ${{ variables.buildProjects }}
+      testProjects: ${{ variables.testProjects }}
+      warningThreshold: ${{ variables.warningThreshold }}
+      coverageThreshold: ${{ variables.coverageThreshold }}
+      sonarCloudEndpoint: ${{ variables.sonarCloudEndpoint }}
+      sonarCloudOrganization: ${{ variables.sonarCloudOrganization }}
+      sonarCloudProjectKey: ${{ variables.sonarCloudProjectKey }}
+      sonarCloudProjectName: ${{ variables.sonarCloudProjectName }}
+      runUnitTests: true
+      runSonarCloudAnalyze: true
