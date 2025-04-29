@@ -2,6 +2,13 @@ name: Nuget 'Krosoft.Extensions.Cache.Distributed.Redis' - $(Date:yyyy.MM.dd).$(
 
 pr: none
 
+resources:
+  repositories:
+    - repository: Krosoft.Extensions
+      type: github
+      name: krosoft-dev/Krosoft.Extensions
+      endpoint: krosoft-dev
+
 trigger:
   branches:
     include:
@@ -11,8 +18,7 @@ trigger:
       - "**/Krosoft.Extensions.Cache.Distributed.Redis/*"
 
 extends:
-  template: ./templates/pipelines/nuget-template.yml
+  template: tools/devops/templates/pipelines/nuget-template.yml@Krosoft.Extensions
   parameters:
     packages:
-     - "Krosoft.Extensions.Cache.Distributed.Redis"
-
+      - "Krosoft.Extensions.Cache.Distributed.Redis"
