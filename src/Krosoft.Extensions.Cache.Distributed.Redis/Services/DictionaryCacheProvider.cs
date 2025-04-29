@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text;
 using Krosoft.Extensions.Cache.Distributed.Redis.Interfaces;
 using Krosoft.Extensions.Core.Extensions;
 using Newtonsoft.Json;
@@ -27,12 +28,68 @@ public class DictionaryCacheProvider : IDistributedCacheProvider
         return await Task.FromResult(true);
     }
 
-    public Task<bool> DeleteRowAsync(string collectionKey, string entryKey, CancellationToken cancellationToken = default) => throw new NotImplementedException();
-    public Task<long> DeleteRowsAsync(string collectionKey, ISet<string> entriesKey, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+    public Task<bool> DeleteRowAsync(string collectionKey, string entryKey, CancellationToken cancellationToken = default)
+    {
+        if (_cache.TryGetValue(collectionKey, out var collection))
+        {
+            var removed = collection.Remove(entryKey);
+            if (collection.Count == 0)
+            {
+                _cache.Remove(collectionKey);
+            }
 
-    public Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+            return Task.FromResult(removed);
+        }
 
-    public IEnumerable<string> GetKeys(string pattern) => _cache.Keys;
+        return Task.FromResult(false);
+    }
+
+    public Task<long> DeleteRowsAsync(string collectionKey, ISet<string> entriesKey, CancellationToken cancellationToken = default)
+    {
+        long removedCount = 0;
+
+        if (_cache.TryGetValue(collectionKey, out var collection))
+        {
+            foreach (var entryKey in entriesKey)
+            {
+                if (collection.Remove(entryKey))
+                {
+                    removedCount++;
+                }
+            }
+
+            if (collection.Count == 0)
+            {
+                _cache.Remove(collectionKey);
+            }
+        }
+
+        return Task.FromResult(removedCount);
+    }
+
+    public Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default)
+    {
+        if (_cache.TryGetValue(key, out var value))
+        {
+            var bytes = value switch
+            {
+                byte[] b => b,
+                string s => Encoding.UTF8.GetBytes(s),
+                _ => null
+            };
+
+            if (bytes != null)
+            {
+                var json = Encoding.UTF8.GetString(bytes);
+                return Task.FromResult(JsonConvert.DeserializeObject<T>(json));
+            }
+        }
+
+        return Task.FromResult(default(T));
+    }
+
+    public IEnumerable<string> GetKeys(string pattern) =>
+        _cache.Keys.Where(k => k.StartsWith(pattern, StringComparison.Ordinal));
 
     public async Task<long> GetLengthAsync(string collectionKey, CancellationToken cancellationToken = default)
     {
@@ -80,7 +137,9 @@ public class DictionaryCacheProvider : IDistributedCacheProvider
         return await Task.FromResult(entry);
     }
 
-    public async Task<List<T>> ReadRowsAsync<T>(string collectionKey, IEnumerable<string> entryKeys, CancellationToken cancellationToken = default)
+    public async Task<List<T>> ReadRowsAsync<T>(string collectionKey,
+                                                IEnumerable<string> entryKeys,
+                                                CancellationToken cancellationToken = default) where T : class
     {
         var collection = GetCollection<T>(collectionKey);
 

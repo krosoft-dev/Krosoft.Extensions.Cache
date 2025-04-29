@@ -25,7 +25,9 @@ public interface ITenantDistributedCacheProvider
     /// <returns>Une ligne de la collection parente.</returns>
     Task<T?> ReadRowAsync<T>(string tenantId, string collectionKey, string entryKey, CancellationToken cancellationToken = default);
 
-    Task<List<T>> ReadRowsAsync<T>(string tenantId, string collectionKey, IEnumerable<string> entryKeys, CancellationToken cancellationToken = default);
+    Task<List<T>> ReadRowsAsync<T>(string tenantId, 
+                                   string collectionKey, IEnumerable<string> entryKeys,
+                                   CancellationToken cancellationToken = default) where T : class;
 
     /// <summary>
     /// Récupère une collection de type T en cache.

@@ -31,7 +31,7 @@ public interface IDistributedCacheProvider
 
     Task<List<T>> ReadRowsAsync<T>(string collectionKey,
                                    IEnumerable<string> entryKeys,
-                                   CancellationToken cancellationToken = default);
+                                   CancellationToken cancellationToken = default)  where T : class ; 
 
     /// <summary>
     /// Récupère une collection de type T en cache.

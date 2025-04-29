@@ -152,7 +152,7 @@ public class DistributedCacheProvider : IDistributedCacheProvider
 
     public async Task<List<T>> ReadRowsAsync<T>(string collectionKey,
                                                 IEnumerable<string> entryKeys,
-                                                CancellationToken cancellationToken = default)
+                                                CancellationToken cancellationToken = default) where T : class
     {
         var db = _factory.Connection.GetDatabase();
         var hashFields = entryKeys.Select(key => (RedisValue)key).ToArray();

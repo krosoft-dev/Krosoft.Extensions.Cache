@@ -59,7 +59,8 @@ public class TenantDistributedCacheProvider : ITenantDistributedCacheProvider
         return _distributedCacheProvider.IsExistAsync(tenantKey, cancellationToken);
     }
 
-    public Task<TimeSpan> PingAsync(CancellationToken cancellationToken = default) => _distributedCacheProvider.PingAsync(cancellationToken);
+    public Task<TimeSpan> PingAsync(CancellationToken cancellationToken = default) 
+        => _distributedCacheProvider.PingAsync(cancellationToken);
 
     /// <summary>
     /// Récupère une ligne de la collection parente.
@@ -73,7 +74,7 @@ public class TenantDistributedCacheProvider : ITenantDistributedCacheProvider
     public Task<T?> ReadRowAsync<T>(string tenantId,
                                     string collectionKey,
                                     string entryKey,
-                                    CancellationToken cancellationToken = default)
+                                    CancellationToken cancellationToken = default) 
     {
         var tenantKey = GetTenantKey(tenantId, collectionKey);
         return _distributedCacheProvider.ReadRowAsync<T>(tenantKey, entryKey, cancellationToken);
@@ -82,7 +83,7 @@ public class TenantDistributedCacheProvider : ITenantDistributedCacheProvider
     public Task<List<T>> ReadRowsAsync<T>(string tenantId,
                                           string collectionKey,
                                           IEnumerable<string> entryKeys,
-                                          CancellationToken cancellationToken = default)
+                                          CancellationToken cancellationToken = default) where T : class
     {
         var tenantKey = GetTenantKey(tenantId, collectionKey);
         return _distributedCacheProvider.ReadRowsAsync<T>(tenantKey, entryKeys, cancellationToken);
