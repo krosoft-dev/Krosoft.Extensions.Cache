@@ -26,6 +26,6 @@
 	<ItemGroup>
 		<PackageReference Include="Krosoft.Extensions.Core" Version="2025.8.19.1582" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="StackExchange.Redis" Version="2.8.58" />
+		<PackageReference Include="StackExchange.Redis" Version="2.9.11" />
 	</ItemGroup>
 </Project>
