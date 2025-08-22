@@ -16,6 +16,6 @@
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.8" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Krosoft.Extensions.Core" Version="2025.8.19.1582" />
+		<PackageReference Include="Krosoft.Extensions.Core" Version="2025.8.22.2201" />
 	</ItemGroup>
 </Project>
