@@ -2,5 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "labels": ["renovate"],
-  "assignees": ["krosoft-dev"]
+  "assignees": ["krosoft-dev"],
+  "packageRules": [
+    {
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "matchPackageNames": ["*"],
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "groupName": "Krosoft packages",
+      "matchPackageNames": ["Krosoft.Extensions.**"]
+    }
+  ]
 }
