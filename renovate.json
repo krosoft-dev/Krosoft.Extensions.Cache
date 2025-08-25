@@ -11,7 +11,7 @@
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
-      "groupName": "'Krosoft.Extensions' packages",
+      "groupName": "all Krosoft.Extensions packages",
       "matchPackageNames": ["Krosoft.Extensions.**"]
     }
   ]
