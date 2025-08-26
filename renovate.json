@@ -17,11 +17,13 @@
     },
     {
       "groupName": "AutoMapper",
-      "matchPackageNames": ["AutoMapper"]
+      "matchPackageNames": ["AutoMapper"],
+      "enabled": false
     },
     {
       "groupName": "MediatR",
-      "matchPackageNames": ["MediatR"]
+      "matchPackageNames": ["MediatR"],
+      "enabled": false
     },
     {
       "groupName": "dotnet packages",
