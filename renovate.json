@@ -3,6 +3,7 @@
   "extends": ["config:recommended"],
   "labels": ["renovate"],
   "assignees": ["krosoft-dev"],
+  "rebaseWhen": "conflicted",
   "packageRules": [
     {
       "groupName": "all non-major dependencies",
@@ -13,6 +14,23 @@
     {
       "groupName": "all Krosoft.Extensions packages",
       "matchPackageNames": ["Krosoft.Extensions.**"]
+    },
+    {
+      "groupName": "AutoMapper",
+      "matchPackageNames": ["AutoMapper"]
+    },
+    {
+      "groupName": "MediatR",
+      "matchPackageNames": ["MediatR"]
+    },
+    {
+      "groupName": "dotnet packages",
+      "extends": "monorepo:dotnet"
+    },
+
+    {
+      "groupName": "microsoft packages",
+      "matchSourceUrls": ["https://github.com/microsoft/{/,}**"]
     }
   ]
 }
