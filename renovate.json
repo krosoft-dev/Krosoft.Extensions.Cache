@@ -1,38 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "labels": ["renovate"],
-  "assignees": ["krosoft-dev"],
-  "rebaseWhen": "conflicted",
-  "packageRules": [
-    {
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "matchPackageNames": ["*"],
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "groupName": "all Krosoft.Extensions packages",
-      "matchPackageNames": ["Krosoft.Extensions.**"]
-    },
-    {
-      "groupName": "AutoMapper",
-      "matchPackageNames": ["AutoMapper"],
-      "enabled": false
-    },
-    {
-      "groupName": "MediatR",
-      "matchPackageNames": ["MediatR"],
-      "enabled": false
-    },
-    {
-      "groupName": "dotnet packages",
-      "extends": "monorepo:dotnet"
-    },
-
-    {
-      "groupName": "microsoft packages",
-      "matchSourceUrls": ["https://github.com/microsoft/{/,}**"]
-    }
-  ]
+  "extends": ["github>krosoft-dev/Krosoft.Configs.Renovate:dotnet"],
+  "assignees": ["krosoft-dev"]
 }
