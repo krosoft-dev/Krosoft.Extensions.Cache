@@ -29,7 +29,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.11" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Krosoft.Extensions.Core" Version="2025.11.13.4103" />
+		<PackageReference Include="Krosoft.Extensions.Core" Version="2025.11.17.4348" />
 		<PackageReference Include="StackExchange.Redis" Version="2.10.1" />
 	</ItemGroup>
 </Project>
