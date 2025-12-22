@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Krosoft.Extensions.Cache.Distributed.Redis.HealthChecks/Krosoft.Extensions.Cache.Distributed.Redis.HealthChecks.csproj" />
+    <Project Path="src/Krosoft.Extensions.Cache.Distributed.Redis/Krosoft.Extensions.Cache.Distributed.Redis.csproj" />
+    <Project Path="src/Krosoft.Extensions.Cache.Memory/Krosoft.Extensions.Cache.Memory.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Krosoft.Extensions.Cache.Distributed.Redis.Tests/Krosoft.Extensions.Cache.Distributed.Redis.Tests.csproj" />
+  </Folder>
+</Solution>
