@@ -1,7 +1,4 @@
-﻿#if !(NET9_0_OR_GREATER)
-using System.Collections;
-#endif
-using System.Reflection;
+﻿using System.Reflection;
 using Krosoft.Extensions.Cache.Memory.Interfaces;
 using Krosoft.Extensions.Core.Models.Exceptions;
 using Microsoft.Extensions.Caching.Memory;
@@ -93,51 +90,7 @@ public class MemoryCacheProvider : ICacheProvider
     /// <returns>Liste des clés des objets en cache.</returns>
     public IEnumerable<string> GetKeys()
     {
-#if NET6_0
-        var items = new List<string>();
-
-        var field = typeof(MemoryCache).GetProperty("EntriesCollection",
-                                                    BindingFlags.NonPublic | BindingFlags.Instance);
-        if (field != null && field.GetValue(_memoryCache) is ICollection collection)
-        {
-            foreach (var item in collection)
-            {
-                var methodInfo = item.GetType().GetProperty("Key");
-                if (methodInfo != null)
-                {
-                    var val = methodInfo.GetValue(item);
-                    var key = val?.ToString();
-                    if (key != null)
-                    {
-                        items.Add(key);
-                    }
-                }
-            }
-
-            return items;
-        }
-
-#endif
-#if (NET7_0 || NET8_0)
-        var fieldInfo = typeof(MemoryCache).GetField("_coherentState", BindingFlags.Instance | BindingFlags.NonPublic);
-        if (fieldInfo != null)
-        {
-            var propertyInfo = fieldInfo.FieldType.GetProperty("EntriesCollection", BindingFlags.Instance | BindingFlags.NonPublic);
-            var value = fieldInfo.GetValue(_memoryCache);
-            if (propertyInfo != null)
-            {
-                var dict = propertyInfo.GetValue(value);
-                if (dict is IDictionary cacheEntries)
-                {
-                    return cacheEntries.Keys
-                                       .OfType<string>()
-                                       .Select(d => d)
-                                       .ToList();
-                }
-            }
-        }
-#endif
-#if (NET9_0_OR_GREATER)
+ 
         var propertyInfo = typeof(MemoryCache).GetProperty("Keys", BindingFlags.Instance | BindingFlags.Public);
 
         if (propertyInfo != null)
@@ -153,7 +106,7 @@ public class MemoryCacheProvider : ICacheProvider
             return cacheKeys.Select(x => x.ToString())!;
         }
 
-#endif
+ 
 
         throw new KrosoftTechnicalException("Impossible de récupérer les clés du cache mémoire.");
     }
