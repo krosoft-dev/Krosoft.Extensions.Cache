@@ -4,7 +4,7 @@
 		<Description>Package pour faciliter la gestion du cache mémoire.</Description>
 	</PropertyGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.10" />
 	</ItemGroup><ItemGroup>
 		<PackageReference Include="Krosoft.Extensions.Core" Version="2026.7.6.8052" />
 	</ItemGroup>
