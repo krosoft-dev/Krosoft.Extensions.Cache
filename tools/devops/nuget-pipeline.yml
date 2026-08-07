@@ -1,4 +1,4 @@
-name: Nuget 'Krosoft.Extensions.Cache.Distributed.Redis' - $(Date:yyyy.MM.dd).$(BuildID)
+name: Nuget 'Krosoft.Extensions.Cache' - $(Date:yyyy.MM.dd).$(BuildID)
 
 pr: none
 
@@ -15,10 +15,13 @@ trigger:
       - main
   paths:
     include:
-      - "**/Krosoft.Extensions.Cache.Distributed.Redis/*"
+      - src
+      - Directory.Build.props
 
 extends:
   template: tools/devops/templates/pipelines/nuget-template.yml@Krosoft.Extensions
   parameters:
     packages:
+      - "Krosoft.Extensions.Cache.Memory"
       - "Krosoft.Extensions.Cache.Distributed.Redis"
+      - "Krosoft.Extensions.Cache.Distributed.Redis.HealthChecks"
