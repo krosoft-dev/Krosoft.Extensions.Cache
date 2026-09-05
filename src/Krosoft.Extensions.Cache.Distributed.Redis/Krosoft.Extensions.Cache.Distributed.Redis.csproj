@@ -10,6 +10,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Krosoft.Extensions.Core" Version="2026.8.31.10083" />
-		<PackageReference Include="StackExchange.Redis" Version="2.12.14" />
+		<PackageReference Include="StackExchange.Redis" Version="3.1.31" />
 	</ItemGroup>
 </Project>
