@@ -6,6 +6,6 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.13" />
 	</ItemGroup><ItemGroup>
-		<PackageReference Include="Krosoft.Extensions.Core" Version="2026.10.9.11143" />
+		<PackageReference Include="Krosoft.Extensions.Core" Version="2026.10.14.11429" />
 	</ItemGroup>
 </Project>
