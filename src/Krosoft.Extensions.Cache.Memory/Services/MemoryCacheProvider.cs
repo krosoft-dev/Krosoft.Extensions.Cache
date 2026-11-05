@@ -47,7 +47,7 @@ public class MemoryCacheProvider : ICacheProvider
     /// <param name="key">Clé de l'entrée.</param>
     /// <param name="firstLoad">Action à faire lors de la première mise en cache.</param>
     /// <returns>Instance de T depuis le cache.</returns>
-    public T? Get<T>(string key, Func<T> firstLoad) => GetValueOrDefault(key, firstLoad());
+    public T? Get<T>(string key, Func<T> firstLoad) => _memoryCache.GetOrCreate(key, _ => firstLoad());
 
     /// <summary>
     /// Récupère une collection de type T en cache.
@@ -60,7 +60,37 @@ public class MemoryCacheProvider : ICacheProvider
     {
         var cacheKey = GetKey<T>();
 
-        return GetValueOrDefault(cacheKey, firstLoad());
+        return _memoryCache.GetOrCreate(cacheKey, _ => firstLoad());
+    }
+
+    /// <summary>
+    /// Récupère une instance d'objet de type T en cache.
+    /// Si elle n'est pas présente, la factory est exécutée et son résultat est mis en cache.
+    /// Si la factory lève une exception, rien n'est mis en cache.
+    /// </summary>
+    /// <remarks>
+    /// Aucun verrou n'est posé : des appels concurrents sur une clé absente peuvent exécuter la factory plusieurs fois.
+    /// </remarks>
+    /// <typeparam name="T">Type de l'objet en cache.</typeparam>
+    /// <param name="key">Clé de l'entrée.</param>
+    /// <param name="factory">Fonction asynchrone qui produit la valeur si elle n'est pas en cache.</param>
+    /// <param name="cacheTime">Durée de mise en cache (<c>null</c> : sans expiration).</param>
+    /// <param name="cancellationToken">Jeton d'annulation transmis à la factory.</param>
+    /// <returns>Instance de T depuis le cache.</returns>
+    public Task<T?> GetOrCreateAsync<T>(string key,
+                                        Func<CancellationToken, Task<T>> factory,
+                                        TimeSpan? cacheTime,
+                                        CancellationToken cancellationToken)
+    {
+        return _memoryCache.GetOrCreateAsync(key, entry =>
+        {
+            if (cacheTime.HasValue)
+            {
+                entry.AbsoluteExpirationRelativeToNow = cacheTime.Value;
+            }
+
+            return factory(cancellationToken);
+        });
     }
 
     public IDictionary<string, Type> GetItemsType()

@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Krosoft.Extensions.Cache.Memory\Krosoft.Extensions.Cache.Memory.csproj" />
+	</ItemGroup>
+</Project>
