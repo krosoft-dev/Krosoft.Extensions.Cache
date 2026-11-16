@@ -8,8 +8,13 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.15" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.15" />
 	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net11.0'">
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="11.0.0" />
+	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Krosoft.Extensions.Core" Version="2026.11.16.13705" />
+		<PackageReference Include="Krosoft.Extensions.Core" Version="2026.11.16.13768" />
 		<PackageReference Include="StackExchange.Redis" Version="2.12.14" />
 	</ItemGroup>
 </Project>
